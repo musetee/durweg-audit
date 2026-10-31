@@ -11,7 +11,12 @@
 需要先装好 Durweg，电脑上要有 git。
 
 1. **打开终端**（和 Durweg 的“每天怎么用”第 1 步一样）。
-2. **下载：** `git clone https://github.com/musetee/durweg-audit.git ~/projects/durweg-audit`
+2. **下载：**
+   - macOS、Linux、WSL：`git clone https://github.com/musetee/durweg-audit.git ~/projects/durweg-audit`
+   - Windows（Durweg 装在 Windows 本机上），在 PowerShell 里：
+     `git clone https://github.com/musetee/durweg-audit.git "$HOME\projects\durweg-audit"`
+
+`~` 和 `$HOME` 都是你的家目录（Windows 上是 `C:\Users\<你>`）。
 
 ## 📅 怎么用
 
@@ -19,11 +24,16 @@
 
    | agent | 会话文件在哪里 |
    | :--- | :--- |
-   | Claude Code | `~/.claude/projects/<项目文件夹路径，把每个 / 换成 ->/`（每个会话一个 `.jsonl` 文件） |
+   | Claude Code | `~/.claude/projects/<项目文件夹路径，把每个 /（Windows 上还有 \ 和 :）换成 ->/`（每个会话一个 `.jsonl` 文件） |
    | Codex | `~/.codex/sessions/<年>/<月>/<日>/`（每个会话一个 `rollout-….jsonl` 文件） |
 
+   Windows 上它们在 `C:\Users\<你>\.claude\projects\` 和 `C:\Users\<你>\.codex\sessions\` 下面。
+
 2. **运行：**
-   `python3 ~/projects/durweg-audit/bin/durweg-audit <运行文件夹> --transcript <会话文件> [更多会话文件]`
+   - macOS、Linux、WSL：
+     `python3 ~/projects/durweg-audit/bin/durweg-audit <运行文件夹> --transcript <会话文件> [更多会话文件]`
+   - Windows，在 PowerShell 里（`py -3` 是 Python 启动器；没有的话用 `python`）：
+     `py -3 "$HOME\projects\durweg-audit\bin\durweg-audit" <运行文件夹> --transcript <会话文件> [更多会话文件]`
 
 第一行就是结果：
 

@@ -13,7 +13,12 @@ matters and you want to be sure the agent did not skip, fake or rewrite anything
 You need Durweg installed, and git.
 
 1. **Open a terminal** (as in step 1 of Durweg's "Every day").
-2. **Get it:** `git clone https://github.com/musetee/durweg-audit.git ~/projects/durweg-audit`
+2. **Get it:**
+   - macOS, Linux, WSL: `git clone https://github.com/musetee/durweg-audit.git ~/projects/durweg-audit`
+   - Windows (Durweg installed on Windows itself), in PowerShell:
+     `git clone https://github.com/musetee/durweg-audit.git "$HOME\projects\durweg-audit"`
+
+`~` and `$HOME` mean your home folder (on Windows `C:\Users\<you>`).
 
 ## 📅 Use it
 
@@ -21,11 +26,16 @@ You need Durweg installed, and git.
 
    | Agent | Where its session files are |
    | :--- | :--- |
-   | Claude Code | `~/.claude/projects/<the project folder, with every / written as ->/` (one `.jsonl` file per session) |
+   | Claude Code | `~/.claude/projects/<the project folder, with every / (on Windows also \ and :) written as ->/` (one `.jsonl` file per session) |
    | Codex | `~/.codex/sessions/<year>/<month>/<day>/` (one `rollout-….jsonl` file per session) |
 
+   On Windows these are under `C:\Users\<you>\.claude\projects\` and `C:\Users\<you>\.codex\sessions\`.
+
 2. **Run the audit:**
-   `python3 ~/projects/durweg-audit/bin/durweg-audit <run folder> --transcript <session file> [more session files]`
+   - macOS, Linux, WSL:
+     `python3 ~/projects/durweg-audit/bin/durweg-audit <run folder> --transcript <session file> [more session files]`
+   - Windows, in PowerShell (`py -3` is the Python launcher; if it is missing, use `python`):
+     `py -3 "$HOME\projects\durweg-audit\bin\durweg-audit" <run folder> --transcript <session file> [more session files]`
 
 Done looks like this: the first line is the result.
 
