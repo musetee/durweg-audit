@@ -506,6 +506,19 @@ class Interruption(WfCase):
         self.assertIn("success was not shown", out)
 
 
+    def test_call_with_variable_run_and_trimmed_output_is_a_gap(self):
+        """durweg confirm "$N" ... | tail -1: the call ran, its ok line was cut off; not a violation."""
+        self.prepare()
+        main(["confirm", str(self.run), "topic", "--quote", "dogs", "--set", "chosen=dogs"])
+        self.tr.bash("N=" + shlex.quote(str(self.run)) + ' && durweg confirm "$N" topic --quote dogs '
+                     "--set chosen=dogs | tail -1", "next: durweg done")
+        self.wf("done", self.run, "topic")
+        self.step_points()
+        self.step_verify()
+        rc, out = self.audit()
+        self.assertEqual(rc, 2, out)
+        self.assertIn("success was not shown", out)
+
 class TranscriptSets(WfCase):
     def test_missing_middle_session(self):
         self.start()

@@ -575,6 +575,8 @@ class Audit:
     def _targets_run(self, data):
         if data["sub"] == "start" or not data["pos"]:
             return False
+        if "$" in data["pos"][0]:
+            return True       # a variable can name this run: cannot be ruled out, so a gap, not a violation
         return self.in_run(data["pos"][0], data["cwd"])[0] or self.mentions_run(data["pos"][0])
 
     # 3. confirmations
